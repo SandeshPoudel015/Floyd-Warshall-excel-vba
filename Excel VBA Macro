@@ -1,0 +1,33 @@
+Option Explicit
+
+Private Sub CommandButton1_Click()
+
+
+Dim i, j, k As Integer
+Dim n As Long
+
+' taking the input of matrix size
+
+n = InputBox("Enter number of vertices (less than 100)")
+
+' setting no-edge value to infinity(very high value) except for the diagonal values
+
+For i = 1 To n
+    For j = 1 To n
+        If Cells(i, j) = 0 And i <> j Then Cells(i, j) = 1000000000
+    Next j
+Next i
+
+
+' the actual floyd warshall algorithm
+
+For k = 1 To n
+    For i = 1 To n
+        For j = 1 To n
+            If Cells(i, k) + Cells(k, j) < Cells(i, j) Then Cells(i, j) = Cells(i, k) + Cells(k, j)
+        Next j
+    Next i
+Next k
+
+
+End Sub
